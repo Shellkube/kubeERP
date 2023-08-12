@@ -106,6 +106,7 @@ RUN build_deps=" \
         libldap2-dev \
         libopenjp2-7-dev \
         libpq-dev \
+        libpq5 \
         libsasl2-dev \
         libtiff5-dev \
         libwebp-dev \
