@@ -111,6 +111,7 @@ RUN build_deps=" \
         libwebp-dev \
         libxml2-dev \
         libxslt-dev \
+        python3-dev \
         python-psycopg2 \
         tcl-dev \
         tk-dev \
