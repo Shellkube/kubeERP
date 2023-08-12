@@ -50,6 +50,6 @@ jobs:
           context: . # Specifies the build context (current directory)
           file: ./16.0.Dockerfile # Specifies the path to the Dockerfile relative to the build context
           push: true
-          tags: shellkube/kubeERP:16.0-onbuild
+          tags: shellkube/kubeerp:16.0-onbuild
           github-token: ${{ secrets.GIT_TOKEN }}
 #           ssh-private-key: ${{ secrets.GIT_KUBO16_ACTION_PRIVATE }}
