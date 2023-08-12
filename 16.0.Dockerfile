@@ -120,7 +120,7 @@ RUN build_deps=" \
     && apt-get update \
     && apt-get install -yqq --no-install-recommends $build_deps \
     && pip install \
-        -r /tmp/oca_ocb_16o_requirements.txt \
+        -r https://raw.githubusercontent.com/$ODOO_SOURCE/$ODOO_VERSION/requirements.txt \
         'websocket-client~=0.56' \
         astor \
         click-odoo-contrib \
