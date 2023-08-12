@@ -93,24 +93,30 @@ RUN python -m venv --system-site-packages /qa/venv \
 ARG ODOO_SOURCE=OCA/OCB
 ARG ODOO_VERSION=16.0
 ENV ODOO_VERSION="$ODOO_VERSION"
+     
 
-# Install Odoo hard & soft dependencies, and Doodba utilities
+# Install Odoo hard & soft dependencies, and Doodba utilities  #  libmysqlclient-dev 
 RUN build_deps=" \
         build-essential \
         libfreetype6-dev \
+        libblas-dev \
+        libatlas-base-dev \
         libfribidi-dev \
         libghc-zlib-dev \
         libharfbuzz-dev \
         libjpeg-dev \
         liblcms2-dev \
         libldap2-dev \
+        libffi-dev \
         libopenjp2-7-dev \
         libpq-dev \
         libsasl2-dev \
+        libssl-dev \
         libtiff5-dev \
         libwebp-dev \
         libxml2-dev \
         libxslt-dev \
+        libxslt1-dev \
         python3-dev \
         python-psycopg2 \
         tcl-dev \
