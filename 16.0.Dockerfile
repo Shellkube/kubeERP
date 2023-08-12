@@ -93,48 +93,42 @@ RUN python -m venv --system-site-packages /qa/venv \
 ARG ODOO_SOURCE=OCA/OCB
 ARG ODOO_VERSION=16.0
 ENV ODOO_VERSION="$ODOO_VERSION"
-     
 
-# Install Odoo hard & soft dependencies, and Doodba utilities  #  libmysqlclient-dev 
+# Install Odoo hard & soft dependencies, and Doodba utilities
 RUN build_deps=" \
         build-essential \
-        gcc \
         libfreetype6-dev \
-        libblas-dev \
-        libatlas-base-dev \
         libfribidi-dev \
         libghc-zlib-dev \
         libharfbuzz-dev \
         libjpeg-dev \
         liblcms2-dev \
         libldap2-dev \
-        libffi-dev \
         libopenjp2-7-dev \
         libpq-dev \
         libsasl2-dev \
-        libssl-dev \
         libtiff5-dev \
         libwebp-dev \
         libxml2-dev \
         libxslt-dev \
-        libxslt1-dev \
         python-dev \
-        python-psycopg2 \
+        python3-psycopg2 \
         tcl-dev \
         tk-dev \
         zlib1g-dev \
-    " 
-RUN apt-get update 
-RUN apt-get install -yqq --no-install-recommends $build_deps 
-RUN pip install -r /tmp/oca_ocb_16o_requirements.txt
-RUN pip install -r 'websocket-client~=0.56' \
+    " \
+    && apt-get update \
+    && apt-get install -yqq --no-install-recommends $build_deps \
+    && pip install \
+        -r /tmp/oca_ocb_16o_requirements.txt \
+        'websocket-client~=0.56' \
         astor \
         click-odoo-contrib \
         debugpy \
         pydevd-odoo \
         flanker[validator] \
         geoip2 \
-        "git-aggregator<3.0.0" \
+        git-aggregator \
         inotify \
         pdfminer.six \
         pg_activity \
@@ -144,14 +138,14 @@ RUN pip install -r 'websocket-client~=0.56' \
         pyOpenSSL \
         python-magic \
         watchdog \
-        wdb 
-RUN (python3 -m compileall -q /usr/local/lib/python3.10/ || true) 
+        wdb \
+    && (python3 -m compileall -q /usr/local/lib/python3.10/ || true) \
     # generate flanker cached tables during install when /usr/local/lib/ is still intended to be written to
     # https://github.com/Tecnativa/doodba/issues/486
-RUN python3 -c 'from flanker.addresslib import address' >/dev/null 2>&1 
-RUN apt-get purge -yqq $build_deps 
-RUN apt-get autopurge -yqq 
-RUN rm -Rf /var/lib/apt/lists/* /tmp/* 
+    && python3 -c 'from flanker.addresslib import address' >/dev/null 2>&1 \
+    && apt-get purge -yqq $build_deps \
+    && apt-get autopurge -yqq \
+    && rm -Rf /var/lib/apt/lists/* /tmp/*
 
 # Metadata
 ARG VCS_REF
