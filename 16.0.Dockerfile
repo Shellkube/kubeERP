@@ -1,4 +1,4 @@
-FROM python:3.8-slim-bullseye AS base
+FROM python:3.10-slim-bullseye AS base
 
 EXPOSE 8069 8072
 
