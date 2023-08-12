@@ -98,6 +98,7 @@ ENV ODOO_VERSION="$ODOO_VERSION"
 # Install Odoo hard & soft dependencies, and Doodba utilities  #  libmysqlclient-dev 
 RUN build_deps=" \
         build-essential \
+        gcc \
         libfreetype6-dev \
         libblas-dev \
         libatlas-base-dev \
