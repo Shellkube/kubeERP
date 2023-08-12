@@ -68,6 +68,7 @@ COPY lib/doodbalib /usr/local/lib/python3.10/site-packages/doodbalib
 COPY build.d common/build.d
 COPY conf.d common/conf.d
 COPY entrypoint.d common/entrypoint.d
+COPY oca_ocb_16o_requirements.txt /tmp/oca_ocb_16o_requirements.txt
 RUN mkdir -p auto/addons auto/geoip custom/src/private \
     && ln /usr/local/bin/direxec common/entrypoint \
     && ln /usr/local/bin/direxec common/build \
@@ -110,7 +111,6 @@ RUN build_deps=" \
         libwebp-dev \
         libxml2-dev \
         libxslt-dev \
-        python-dev \
         python-psycopg2 \
         tcl-dev \
         tk-dev \
@@ -118,7 +118,7 @@ RUN build_deps=" \
     " 
 RUN apt-get update 
 RUN apt-get install -yqq --no-install-recommends $build_deps 
-RUN pip install -r https://raw.githubusercontent.com/$ODOO_SOURCE/$ODOO_VERSION/requirements.txt 
+RUN pip install -r /tmp/oca_ocb_16o_requirements.txt
 RUN pip install -r 'websocket-client~=0.56' \
         astor \
         click-odoo-contrib \
@@ -143,7 +143,7 @@ RUN (python3 -m compileall -q /usr/local/lib/python3.10/ || true)
 RUN python3 -c 'from flanker.addresslib import address' >/dev/null 2>&1 
 RUN apt-get purge -yqq $build_deps 
 RUN apt-get autopurge -yqq 
-RUN rm -Rf /var/lib/apt/lists/* /tmp/*
+RUN rm -Rf /var/lib/apt/lists/* /tmp/* 
 
 # Metadata
 ARG VCS_REF
