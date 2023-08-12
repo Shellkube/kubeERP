@@ -110,6 +110,8 @@ RUN build_deps=" \
         libwebp-dev \
         libxml2-dev \
         libxslt-dev \
+        python-dev \
+        python-psycopg2 \
         tcl-dev \
         tk-dev \
         zlib1g-dev \
@@ -117,12 +119,12 @@ RUN build_deps=" \
 RUN apt-get update 
 RUN apt-get install -yqq --no-install-recommends $build_deps 
 RUN pip install -r https://raw.githubusercontent.com/$ODOO_SOURCE/$ODOO_VERSION/requirements.txt 
-RUN pip install 'websocket-client~=0.56' 
-RUN pip install astor 
-RUN pip install click-odoo-contrib 
-RUN pip install debugpy 
-RUN pip install pydevd-odoo 
-RUN pip install -r flanker[validator] \
+RUN pip install -r 'websocket-client~=0.56' \
+        astor \
+        click-odoo-contrib \
+        debugpy \
+        pydevd-odoo \
+        flanker[validator] \
         geoip2 \
         "git-aggregator<3.0.0" \
         inotify \
